@@ -10,12 +10,17 @@ from rest_framework.routers import DefaultRouter
 
 from django.urls import path
 from .apiviews import *
+from . import views
 
 router = DefaultRouter()
 
 urlpatterns = [
     path("users/", UserCreate.as_view(), name="user_create"),
     path("login/", LoginView.as_view(), name="login"),
+    path('access/token', views.getAccessToken, name='get_mpesa_access_token'),
+    path('online/lipa', views.lipa_na_mpesa_online, name='lipa_na_mpesa'),
+    path('callback/', views.MpesaCallBack, name='callback'),
+
 ]
 
 urlpatterns += router.urls

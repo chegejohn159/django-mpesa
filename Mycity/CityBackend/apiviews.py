@@ -6,6 +6,9 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
+from django.views.decorators.csrf import csrf_exempt
+
+from . mpesa_credentials import MpesaAccessToken, LipanaMpesaPpassword
 
 class UserCreate(generics.CreateAPIView):
 	authentication_classes = ()
@@ -24,3 +27,4 @@ class LoginView(APIView):
 			return Response({"token": user.auth_token.key})
 		else:
 			return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
+
